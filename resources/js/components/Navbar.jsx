@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faSignIn } from "@fortawesome/free-solid-svg-icons";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-
+import { useLocation } from "react-router-dom";
 
 import Home from "./Home";
 import Contact from "./Contact";
@@ -19,6 +19,8 @@ import Thankyou from "./Thankyou";
 import Signup from "./Signup";
 
 function MyApp() {
+ 
+
     return( 
     <BrowserRouter basename="">
         <nav>
