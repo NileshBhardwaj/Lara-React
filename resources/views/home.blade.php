@@ -359,6 +359,11 @@
             width: 361px;
             margin-left: 1446px;
         }
+
+        a.backtohome {
+            font-size: 19px;
+            color: aliceblue;
+        }
     </style>
 </head>
 
