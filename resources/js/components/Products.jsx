@@ -22,7 +22,6 @@ function Products() {
                 item.id === id ? { ...item, [name]: parseFloat(value) } : item
             )
         );
-        console.log(setData);
     };
 
     const handleBlur = (id) => {
@@ -34,7 +33,7 @@ function Products() {
                 useEffect();
             })
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
             });
     };
     const handleDownload = () => {
@@ -175,6 +174,7 @@ function Products() {
                                 <th>Description</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
+                                {/* <th>Product Image</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -212,6 +212,19 @@ function Products() {
                                             onBlur={() => handleBlur(item.id)}
                                         />
                                     </td>
+                                    {/* <td>
+                                        <input
+                                            type="file"
+                                            name="image"
+                                            onChange={(event) =>
+                                                handleInputChange(
+                                                    event,
+                                                    item.id
+                                                )
+                                            }
+                                            onBlur={() => handleBlur(item.id)}
+                                            />
+                                    </td> */}
                                 </tr>
                             ))}
                         </tbody>
