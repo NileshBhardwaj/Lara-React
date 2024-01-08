@@ -15,7 +15,7 @@ function Footer() {
 
 export default Footer;
 
-const rootElement = document.getElementById("footer");
-const root = createRoot(rootElement);
+// const rootElement = document.getElementById("footer");
+// const root = createRoot(rootElement);
 
-root.render(<Footer />);
+// root.render(<Footer />);

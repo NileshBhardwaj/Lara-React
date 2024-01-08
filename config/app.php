@@ -168,8 +168,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class
-    
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     
         ])->toArray(),
 

@@ -6,7 +6,7 @@ function Logout() {
         .then(function (response) {
             console.log(response);
     if(response){
-        window.location = "http://127.0.0.1:8000/login"
+        window.location = "http://127.0.0.1:8000/login-page"
     }
         })
         .catch(function (error) {
