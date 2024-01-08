@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
 use Auth;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -102,9 +103,39 @@ class PaymentController extends Controller
         $response = $provider->capturePaymentOrder($request['token']);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-            // Assuming you have the necessary data available
-            // $data = response()->json($response);
-            
+            // dd($response);
+            $id = $response['id'];
+            $status = $response['status'];
+            $payer_name = $response['payer'];
+            $name = $payer_name['name'];
+            $payer_email = $payer_name['email_address'];
+
+            $payment_source = $response['purchase_units'];
+
+            $payments = $payment_source['0'];
+
+            $payments = $payments['payments'];
+
+            $captures = $payments['captures'];
+
+            $main = $captures['0'];
+
+            $transaction_id = $main['id'];
+
+            $amount = $main['amount'];
+
+            $price = $amount['value'];
+
+            $capture_payment = Order::create([
+                'user_id' => $user,
+                'account_id' => $payer_email,
+                'quantity' => '4',
+                'price' => $price,
+                'payment_id' => $transaction_id,
+                'order_id' => 'isdgbivsildhvshil',
+                'status' => $status,
+
+            ]);
             // Delete all rows from the cart table where the user_id is equal to $user
             Cart::where('user_id', $user)->delete();
 
