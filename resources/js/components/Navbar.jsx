@@ -15,8 +15,7 @@ import Logout from "./Logout";
 import Analytics from "./Analytics";
 import Cart from "./Cart";
 import Thankyou from "./Thankyou";
-// import Footer from "./Footer";
-import Signup from "./Signup";
+
 
 function MyApp() {
  
@@ -63,14 +62,16 @@ function MyApp() {
 
             <Route path="/about" element={<About />} />
             <Route path="/thankyou" element={<Thankyou />} />
-
-
-
-
         </Routes>
       
     </BrowserRouter>
     
     );
 }
-ReactDOM.createRoot(document.getElementById('app')).render(<MyApp/>);
+// ReactDOM.createRoot(document.getElementById('app')).render(<MyApp/>);
+const root = ReactDOM.createRoot(document.getElementById("app"));
+root.render(
+  <React.StrictMode>
+    <MyApp />
+  </React.StrictMode>
+);

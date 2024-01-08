@@ -35,40 +35,18 @@ function Home() {
     };
 
     const handleDownload = () => {
-        const rows = data.map((product) => [
-            product.id,
-            product.name,
-            product.description,
-            product.quantity,
-            product.price,
-        ]);
-
-        // calculate total price
-        const totalPrice = data.reduce(
-            (total, item) => total + item.price * item.quantity,
-            0
-        );
-        // const price = data.reduce((total, item) =>item.price);
-        // console.log(price);
-        const formatter = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-        });
-        const formattedTotalPrice = formatter.format(totalPrice);
-
         // create workbook and worksheet
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet("Product");
 
         // customize header names
-        worksheet.addRow(["ID", "Name", "Description", "Quantity", "Price"]),
-            (worksheet.columns = [
-                { header: "ID", key: "id", width: 10 },
-                { header: "Name", key: "name", width: 20 },
-                { header: "Description", key: "description", width: 20 },
-                { header: "Quantity", key: "quantity", width: 10 },
-                { header: "Price", key: "formattedPrice", width: 10 },
-            ]);
+        worksheet.columns = [
+            { header: "ID", key: "id", width: 10 },
+            { header: "Name", key: "name", width: 20 },
+            { header: "Description", key: "description", width: 20 },
+            { header: "Quantity", key: "quantity", width: 10 },
+            { header: "Price", key: "price", width: 15 },
+        ];
 
         // Add rows
         worksheet.addRow([
@@ -77,23 +55,87 @@ function Home() {
             "Description",
             "Quantity",
             "Price",
-        ]).alignment = { horizontal: "center" }.color = "black";
-        data.forEach((product) => {
-            const { id, name, description, quantity, price } = product;
-            product.formattedPrice = `$${price}`;
+        ]).alignment = { horizontal: "right" };
 
-            worksheet.addRow(product).alignment = { horizontal: "center"};
+        data.forEach((product, index) => {
+            const { id, name, description, quantity, price } = product;
+
+            // Add row with product data
+            const row = worksheet.addRow({
+                id,
+                name,
+                description,
+                quantity,
+                price,
+            });
+
+            // Apply currency format to price cells
+            row.getCell(5).numFmt = '"$"#,##0.00';
+
+            row.alignment = {
+                horizontal: "right",
+                vertical: "middle",
+                wrapText: true,
+            };
         });
 
-        // Add rows
+        // calculate total price
+        const totalPrice = data.reduce(
+            (total, item) => total + item.price * item.quantity,
+            0
+        );
 
         // Add total row
-        worksheet.addRow(["", "", "", "Total", formattedTotalPrice]);
+        const totalRow = worksheet.addRow(["Total"]);
+        totalRow.alignment = {
+            horizontal: "right",
+            vertical: "middle",
+            wrapText: true,
+        };
+        const totalCell = totalRow.getCell(5);
+        totalCell.alignment = {
+            horizontal: "center",
+            vertical: "middle",
+            wrapText: true,
+        };
+
+        totalRow.font = { size: 13, bold: true };
+
+        // Construct the formula string dynamically
+        let formula = "";
+        for (let i = 3; i < data.length + 3; i++) {
+            formula += `D${i}*E${i} + `;
+        }
+        formula += `SUM(E3:E${data.length + 2})`;
+
+        totalCell.value = {
+            formula: formula,
+            result: totalPrice,
+        };
+
+        // Apply currency format to total cell
+        totalCell.numFmt = '"$"#,##0.00';
+
+        worksheet.getRow(2).height = 20.35;
 
         // Merge cells for the title
         worksheet.mergeCells("A1:E1");
-        worksheet.getCell("A1").value = "Products";
-        worksheet.getCell("A1").alignment = { horizontal: "center" };
+        let titleCell = worksheet.getCell("A1");
+        titleCell.value = "Products";
+        titleCell.alignment = {
+            horizontal: "center",
+            vertical: "middle",
+            wrapText: true,
+        };
+
+        worksheet.getRow(1).height = 30.35;
+
+        titleCell.font = { size: 15, bold: true };
+        titleCell.fill = {
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "B2CD9C" }, // Yellow color
+        };
 
         workbook.xlsx.writeBuffer().then((buffer) => {
             const blob = new Blob([buffer], {
@@ -102,7 +144,6 @@ function Home() {
             FileSaver.saveAs(blob, "ReportFor2024.xlsx");
         });
     };
-
     useEffect(() => {
         fetchInfo();
     }, []);
@@ -147,7 +188,7 @@ function Home() {
                             </p>
                             <div className="product-bottom-details">
                                 <div className="product-price">
-                                    <small>$200</small>${dataObj.price}
+                                    <small>$1000</small>${dataObj.price}
                                 </div>
                                 <div className="product-links">
                                     <button

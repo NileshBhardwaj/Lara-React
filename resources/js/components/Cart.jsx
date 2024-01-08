@@ -210,7 +210,7 @@ function Cart() {
                                     type="button"
                                     className="btn btn-primary btn-lg">
 
-                                   <strong>Check Out</strong>
+                                   <strong>Pay Now</strong>
                                 </button>
                                     </div>
                                 </div>

@@ -5,6 +5,10 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomAuth;
+use App\Http\Controllers\RegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +22,16 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth');
 });
+Route::get('/login-page', function () {
+    return view('auth');
+})->name('login-page');
+Route::get('/signup-page', function () {
+    return view('auth');
+});
+Route::get('/admin',[AdminController::class,'admin'])->middleware(['auth']);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('paypal/payment', [PaymentController::class, 'payment'])->name('paypal.payment');
     Route::get('paypal/payment/success', [PaymentController::class, 'paymentSuccess'])->name('paypal.payment.success');
@@ -35,6 +47,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/increase_quantity', [CartController::class, 'increase_quantity_cart']);
     Route::post('/decrease_quantity', [CartController::class, 'decrease_quantity_cart']);
 });
+
+Route::get('/admin',function(){
+    return view('admin');
+})->middleware(['auth','role']);
+Route::get('/product',function(){
+    return view('admin');
+})->middleware(['auth','role']);
+
+Route::post('/update-product',[AdminController::class,'update_product'])->middleware(['auth','role']);
+
+Route::get('/register',[RegisterController::class,'create']);
+Route::post('/log',[CustomAuth::class,'login'])->name('log');
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {

@@ -368,11 +368,12 @@
 </head>
 
 <body>
-    @viteReactRefresh
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
     <div id=app></div>
 
     <div id="footer"></div>
+    @viteReactRefresh
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </body>
 
 </html>
