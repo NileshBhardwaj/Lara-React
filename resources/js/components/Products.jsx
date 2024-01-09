@@ -4,30 +4,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import ExcelJS from "exceljs";
 import FileSaver from "file-saver";
+import ReactPaginate from "react-paginate";
+
 function Products() {
     const url = "/products";
     const [data, setData] = useState([]);
     const [message, setMessage] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const indexOfLastItem = currentPage * itemsPerPage;
 
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
     useEffect(() => {
         axios
-            .get(url)
+            .get(`${url}?page=${currentPage}&limit=${itemsPerPage}`)
             .then((res) => setData(res.data))
             .catch((err) => console.error(err));
-    }, []);
+    }, [currentPage, itemsPerPage]);
 
-    // const handleInputChange = (event, id) => {
-
-    //     //destructures the target property of the event object into two variables: name and value.
-    //     const { name, value } = event.target;
-    //     console.log(name,value);
-    //     setData(
-    //         data.map((item) =>
-    //             item.id === id ? { ...item, [name]: parseFloat(value) } : item
-    //         )
-    //     );
-    // };
-
+    const handlePageChange = (data) => {
+        let selected = data.selected;
+        setCurrentPage(selected + 1);
+    };
     const handleInputChange = (event, id) => {
         var name = event.target.name;
         var value = event.target.value;
@@ -35,7 +34,7 @@ function Products() {
         // Create a new copy of the data array
         var newData = data.slice();
 
-        console.log(newData);
+        // console.log(newData);
         // Loop over each item in the data array
         for (var i = 0; i < newData.length; i++) {
             var item = newData[i];
@@ -70,25 +69,49 @@ function Products() {
         // create workbook and worksheet
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet("Product");
+        let titleCell = worksheet.getCell("A1");
+        titleCell.value = "Products";
+        titleCell.alignment = {
+            horizontal: "center",
+            vertical: "middle",
+            wrapText: true,
+        };
 
-        // customize header names
-        worksheet.columns = [
-            { header: "ID", key: "id", width: 10 },
-            { header: "Name", key: "name", width: 20 },
-            { header: "Description", key: "description", width: 20 },
-            { header: "Quantity", key: "quantity", width: 10 },
-            { header: "Price", key: "price", width: 15 },
-        ];
+        worksheet.getRow(1).height = 30.35;
 
-        // Add rows
-        worksheet.addRow([
+        titleCell.font = { size: 15, bold: true };
+        titleCell.fill = {
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "B2CD9C" }, // Yellow color
+        };
+
+        // Merge cells for the title
+        worksheet.mergeCells("A1:E1");
+
+        worksheet.getRow(2).values = [
             "ID",
             "Name",
             "Description",
             "Quantity",
             "Price",
-        ]).alignment = { horizontal: "right" };
-
+        ];
+        worksheet.columns = [
+            { key: "id", width: 10 },
+            { key: "name", width: 20 },
+            { key: "description", width: 20 },
+            { key: "quantity", width: 10 },
+            { key: "price", width: 15 },
+        ];
+        worksheet.autoFilter = {
+            from: {
+                row: "A2",
+            },
+            to: {
+                //   row: 10,
+                column: "E5",
+            },
+        };
         data.forEach((product, index) => {
             const { id, name, description, quantity, price } = product;
 
@@ -124,6 +147,7 @@ function Products() {
             vertical: "middle",
             wrapText: true,
         };
+
         const totalCell = totalRow.getCell(5);
         totalCell.alignment = {
             horizontal: "center",
@@ -149,26 +173,10 @@ function Products() {
         totalCell.numFmt = '"$"#,##0.00';
 
         worksheet.getRow(2).height = 20.35;
-
+        worksheet.getRow(2).alignment = { horizontal: "right" };
         // Merge cells for the title
-        worksheet.mergeCells("A1:E1");
-        let titleCell = worksheet.getCell("A1");
-        titleCell.value = "Products";
-        titleCell.alignment = {
-            horizontal: "center",
-            vertical: "middle",
-            wrapText: true,
-        };
 
-        worksheet.getRow(1).height = 30.35;
-
-        titleCell.font = { size: 15, bold: true };
-        titleCell.fill = {
-            type: "pattern",
-            pattern: "solid",
-            fgColor: { argb: "B2CD9C" }, // Yellow color
-        };
-
+        // worksheet.autoFilter = 'A1:C1';
         workbook.xlsx.writeBuffer().then((buffer) => {
             const blob = new Blob([buffer], {
                 type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -197,7 +205,7 @@ function Products() {
                         </button>
                     </div>
                     {message && (
-                        <div class="alert alert-success">
+                        <div className="alert alert-success">
                             <strong>Success!</strong> {message}
                         </div>
                     )}
@@ -210,18 +218,17 @@ function Products() {
                                 <th>Description</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
-                                {/* <th>Product Image</th> */}
+                                <th>Product Image</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((item, index) => (
+                            {currentItems.map((item, index) => (
                                 <tr key={item.id}>
-                                    <td>{index + 1}.</td>
-                                    {/* <td>{item.id}</td> */}
+                                    {/* <td>{index + 1}.</td> */}
+                                    <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>
-                                    
                                         <input
                                             type="number"
                                             name="quantity"
@@ -237,11 +244,34 @@ function Products() {
                                     </td>
                                     <td>
                                         <div className="td-div">
-                                        <label class="input-group-addon" for="number">$</label> 
+                                            <label
+                                                className="input-group-addon"
+                                                htmlFor="number"
+                                            >
+                                                $
+                                            </label>
+                                            <input
+                                                type="number"
+                                                name="price"
+                                                value={item.price}
+                                                onChange={(event) =>
+                                                    handleInputChange(
+                                                        event,
+                                                        item.id
+                                                    )
+                                                }
+                                                onBlur={() =>
+                                                    handleBlur(item.id)
+                                                }
+                                            />
+                                        </div>
+                                    </td>
+                                    <td>
                                         <input
-                                            type="number"
-                                            name="price"
-                                            value={item.price}
+                                            type="file"
+                                            name="image"
+                                            className="file"
+                                            value={""}
                                             onChange={(event) =>
                                                 handleInputChange(
                                                     event,
@@ -250,27 +280,26 @@ function Products() {
                                             }
                                             onBlur={() => handleBlur(item.id)}
                                         />
-                                        </div>
                                     </td>
-                                    {/* <td>
-                                        <input
-                                            type="file"
-                                            name="image"
-                                            onChange={(event) =>
-                                                handleInputChange(
-                                                    event,
-                                                    item.id
-                                                )
-                                            }
-                                            onBlur={() => handleBlur(item.id)}
-                                            />
-                                    </td> */}
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
+            <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={Math.ceil(data.length / itemsPerPage)}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageChange}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+            />
         </>
     );
 }
