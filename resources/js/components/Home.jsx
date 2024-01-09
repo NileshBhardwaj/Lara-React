@@ -40,6 +40,11 @@ function Home() {
         const worksheet = workbook.addWorksheet("Product");
 
         // customize header names
+        worksheet.autoFilter = {
+            from: 'A2',
+            to: 'E2',
+          }
+
         worksheet.columns = [
             { header: "ID", key: "id", width: 10 },
             { header: "Name", key: "name", width: 20 },
@@ -136,7 +141,7 @@ function Home() {
             pattern: "solid",
             fgColor: { argb: "B2CD9C" }, // Yellow color
         };
-
+        
         workbook.xlsx.writeBuffer().then((buffer) => {
             const blob = new Blob([buffer], {
                 type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -144,6 +149,7 @@ function Home() {
             FileSaver.saveAs(blob, "ReportFor2024.xlsx");
         });
     };
+   
     useEffect(() => {
         fetchInfo();
     }, []);
