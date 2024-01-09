@@ -109,7 +109,7 @@
         .p-6.text-gray-900.dark\:text-gray-100 {
             display: flex;
             justify-content: center;
-            margin-bottom: 98px;
+            margin-bottom: 40px;
         }
 
         .export {
@@ -191,6 +191,28 @@
         .td-div {
             display: flex;
         }
+        input.file {
+    width: 110px;
+}.pagination > li {
+  display: inline-block;
+  padding-left: 0;
+}
+.pagination > li > a, .pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  line-height: 1.42857143;
+  text-decoration: none;
+  color: #2c689c;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-left: -1px;
+  font-size: 18px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+}
     </style>
 </head>
 
