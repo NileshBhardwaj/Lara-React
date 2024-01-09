@@ -65,10 +65,43 @@ function Products() {
                 // console.error(error);
             });
     };
+    const uploadFile = (event, id) => {
+        // Create a new FormData object
+        const formData = new FormData();
+
+        // Get the file from the event target
+        const file = event.target.files[0];
+
+        // Append the file to the FormData object
+        formData.append("image", file);
+
+        // Append the product id to the FormData object
+        formData.append("id", id);
+
+        // Send the POST request
+        axios
+            .post("/update-product", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((response) => {
+                console.log(response);
+                setMessage("Product Image is updated successfully !");
+                setTimeout(() => setMessage(""), 3000);
+                useEffect();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     const handleDownload = () => {
         // create workbook and worksheet
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet("Product");
+        
+        
         let titleCell = worksheet.getCell("A1");
         titleCell.value = "Products";
         titleCell.alignment = {
@@ -103,15 +136,7 @@ function Products() {
             { key: "quantity", width: 10 },
             { key: "price", width: 15 },
         ];
-        worksheet.autoFilter = {
-            from: {
-                row: "A2",
-            },
-            to: {
-                //   row: 10,
-                column: "E5",
-            },
-        };
+      
         data.forEach((product, index) => {
             const { id, name, description, quantity, price } = product;
 
@@ -133,6 +158,18 @@ function Products() {
                 wrapText: true,
             };
         });
+        worksheet.autoFilter = {
+            from: {
+              row: 2,
+              column: 1
+            },
+            to: {
+              row: 2,
+              column: 5,
+            }
+          }
+          
+
 
         // calculate total price
         const totalPrice = data.reduce(
@@ -175,6 +212,20 @@ function Products() {
         worksheet.getRow(2).height = 20.35;
         worksheet.getRow(2).alignment = { horizontal: "right" };
         // Merge cells for the title
+
+        const lastRow = data.length + 2;
+    
+        worksheet.autoFilter = {
+            from: {
+                row: 2,
+                column: 1
+            },
+            to: {
+                row: lastRow,
+                column: 5,
+            }
+        };
+    
 
         // worksheet.autoFilter = 'A1:C1';
         workbook.xlsx.writeBuffer().then((buffer) => {
@@ -271,14 +322,9 @@ function Products() {
                                             type="file"
                                             name="image"
                                             className="file"
-                                            value={""}
                                             onChange={(event) =>
-                                                handleInputChange(
-                                                    event,
-                                                    item.id
-                                                )
+                                                uploadFile(event, item.id)
                                             }
-                                            onBlur={() => handleBlur(item.id)}
                                         />
                                     </td>
                                 </tr>
