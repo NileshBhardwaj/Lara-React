@@ -7,6 +7,7 @@ import FileSaver from "file-saver";
 function Products() {
     const url = "/products";
     const [data, setData] = useState([]);
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         axios
@@ -15,21 +16,50 @@ function Products() {
             .catch((err) => console.error(err));
     }, []);
 
+    // const handleInputChange = (event, id) => {
+
+    //     //destructures the target property of the event object into two variables: name and value.
+    //     const { name, value } = event.target;
+    //     console.log(name,value);
+    //     setData(
+    //         data.map((item) =>
+    //             item.id === id ? { ...item, [name]: parseFloat(value) } : item
+    //         )
+    //     );
+    // };
+
     const handleInputChange = (event, id) => {
-        const { name, value } = event.target;
-        setData(
-            data.map((item) =>
-                item.id === id ? { ...item, [name]: parseFloat(value) } : item
-            )
-        );
+        var name = event.target.name;
+        var value = event.target.value;
+
+        // Create a new copy of the data array
+        var newData = data.slice();
+
+        console.log(newData);
+        // Loop over each item in the data array
+        for (var i = 0; i < newData.length; i++) {
+            var item = newData[i];
+
+            // If the item's id matches the given id
+            if (item.id === id) {
+                // Update the item's property based on the name and value
+                item[name] = parseFloat(value);
+            }
+        }
+
+        // Set the state with the new data array
+        setData(newData);
     };
 
     const handleBlur = (id) => {
         const product = data.find((item) => item.id === id);
+        // console.log(product)
         axios
             .post("/update-product", product)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
+                setMessage("Product details are updated successfully !");
+                setTimeout(() => setMessage(""), 3000);
                 useEffect();
             })
             .catch((error) => {
@@ -151,6 +181,7 @@ function Products() {
             <div>
                 <h1>Products Details</h1>
             </div>
+
             <div className="p-6 text-gray-900 dark:text-gray-100">
                 <div id="responseContainer">
                     <div className="wrapper" id="excel">
@@ -165,6 +196,11 @@ function Products() {
                             </strong>
                         </button>
                     </div>
+                    {message && (
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> {message}
+                        </div>
+                    )}
                     <table id="responseContainer">
                         <thead>
                             <tr>
@@ -185,6 +221,7 @@ function Products() {
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>
+                                    
                                         <input
                                             type="number"
                                             name="quantity"
@@ -199,6 +236,8 @@ function Products() {
                                         />
                                     </td>
                                     <td>
+                                        <div className="td-div">
+                                        <label class="input-group-addon" for="number">$</label> 
                                         <input
                                             type="number"
                                             name="price"
@@ -211,6 +250,7 @@ function Products() {
                                             }
                                             onBlur={() => handleBlur(item.id)}
                                         />
+                                        </div>
                                     </td>
                                     {/* <td>
                                         <input

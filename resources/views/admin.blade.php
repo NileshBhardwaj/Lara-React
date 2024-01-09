@@ -183,6 +183,14 @@
             -moz-transition: 0.2s ease all;
             -webkit-transition: 0.2s ease all;
         }
+
+        label.input-group-addon {
+            margin-top: 10px;
+        }
+
+        .td-div {
+            display: flex;
+        }
     </style>
 </head>
 
