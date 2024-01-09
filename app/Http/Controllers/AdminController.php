@@ -15,6 +15,22 @@ class AdminController extends Controller
     public function update_product(Request $request)
     {
         // dd($request->all()); 
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $path = public_path().'/images';
+            $file->move($path, $fileName);
+    
+          
+            $id = $request->input('id');
+    // dd($id);
+           
+            Product::where('id', $id)->update(['image' => $fileName]);
+            // Product::where('id', $id)->update(['image_url' => asset('public/images/'.$fileName)]);
+
+            return response()->json(['message' => 'User image  updated successfully']);
+        }
         $product_id = $request->id;
         $price = $request->price;
         $quantity = $request->quantity;
