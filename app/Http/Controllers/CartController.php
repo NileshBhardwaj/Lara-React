@@ -38,7 +38,7 @@ class CartController extends Controller
     {
         $user = Auth::user()->id;
 
-        $get_cart = Cart::select('carts.*', 'products.price', 'products.name')
+        $get_cart = Cart::select('carts.*', 'products.price', 'products.name','products.image')
             ->join('products', 'carts.product_id', '=', 'products.id')
             ->where('user_id', $user)->get();
         // dd($get_cart);

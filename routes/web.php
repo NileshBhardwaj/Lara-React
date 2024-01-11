@@ -31,6 +31,8 @@ Route::get('/signup-page', function () {
     return view('auth');
 });
 Route::get('/admin',[AdminController::class,'admin'])->middleware(['auth']);
+Route::get('/payment-data',[AdminController::class,'payment_data'])->middleware(['auth']);
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('paypal/payment', [PaymentController::class, 'payment'])->name('paypal.payment');
@@ -48,10 +50,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/decrease_quantity', [CartController::class, 'decrease_quantity_cart']);
 });
 
+
 Route::get('/admin',function(){
     return view('admin');
 })->middleware(['auth','role']);
 Route::get('/product',function(){
+    return view('admin');
+})->middleware(['auth','role']);
+Route::get('/payment-details',function(){
     return view('admin');
 })->middleware(['auth','role']);
 
@@ -75,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('home');
     });
     Route::get('/thankyou', function () {
+        return view('home');
+    })->name("thankyou");
+    Route::get('/checkout', function () {
         return view('home');
     })->name("thankyou");
 });

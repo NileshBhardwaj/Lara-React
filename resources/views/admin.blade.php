@@ -191,28 +191,122 @@
         .td-div {
             display: flex;
         }
+
         input.file {
-    width: 110px;
-}.pagination > li {
-  display: inline-block;
-  padding-left: 0;
-}
-.pagination > li > a, .pagination > li > span {
-  position: relative;
-  float: left;
-  padding: 6px 12px;
-  line-height: 1.42857143;
-  text-decoration: none;
-  color: #2c689c;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  margin-left: -1px;
-  font-size: 18px;
-}
-.pagination {
-  display: flex;
-  justify-content: center;
-}
+            width: 110px;
+        }
+
+        .pagination>li {
+            display: inline-block;
+            padding-left: 0;
+        }
+
+        .pagination>li>a,
+        .pagination>li>span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            line-height: 1.42857143;
+            text-decoration: none;
+            color: #2c689c;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-left: -1px;
+            font-size: 18px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+        }
+
+        .circle {
+            width: 170px;
+            height: 127px;
+            border-radius: 3px;
+            /* background-color: #000; */
+            /* border: 1px solid black; */
+            box-shadow: 2px black;
+        }
+
+        button.modal-button {
+            width: 100%;
+            border-radius: 4px;
+            background-color: #4CAF50;
+        }
+
+        .header {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            height: 72px;
+            border-radius: 3px;
+        }
+
+        .footer {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: flex-end;
+            background-color: white;
+            height: 72px;
+            border-radius: 3px;
+            margin-top: 9em;
+        }
+
+        #seprator {
+            width: 100%;
+            height: 1px;
+            background: black;
+            margin-bottom: 25px;
+
+        }
+
+        .close {
+            width: 54px;
+            font-size: 17px;
+            background-blend-mode: color-burn;
+            background-color: white;
+        }
+
+        svg.svg-inline--fa.fa-rectangle-xmark {
+            color: black;
+            font-size: xx-large;
+            margin-left: 155px;
+        }
+
+        .imageContainer-modal {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        button.\.btn-default {
+            margin-right: 19px;
+            border-radius: 4px;
+            font-size: 17px;
+        }
+
+        input.file {
+            width: 223px;
+            margin-right: 25px;
+        }
+
+        .circle-modal {
+            width: 227px;
+            height: 156px;
+            border-radius: 3px;
+            /* background-color: #000; */
+            /* border: 1px solid black; */
+            box-shadow: 2px black;
+        }
+
+        .alert.alert-danger {
+            margin-top: 15px;
+            margin-right: 7px;
+        }
     </style>
 </head>
 
