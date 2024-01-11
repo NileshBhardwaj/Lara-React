@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -126,6 +127,11 @@ class PaymentController extends Controller
 
             $price = $amount['value'];
 
+            $date = $main['create_time'];
+
+            $utcDate = Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $date);
+            $localDate = $utcDate->setTimezone('Asia/Kolkata'); 
+
             $capture_payment = Order::create([
                 'user_id' => $user,
                 'account_id' => $payer_email,
@@ -134,6 +140,7 @@ class PaymentController extends Controller
                 'payment_id' => $transaction_id,
                 'order_id' => 'isdgbivsildhvshil',
                 'status' => $status,
+                'date' => $localDate,
 
             ]);
             // Delete all rows from the cart table where the user_id is equal to $user

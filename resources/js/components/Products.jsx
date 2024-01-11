@@ -2,27 +2,40 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+
 import ExcelJS from "exceljs";
 import FileSaver from "file-saver";
 import ReactPaginate from "react-paginate";
-
+import Modal from "@material-ui/core/Modal";
 function Products() {
     const url = "/products";
     const [data, setData] = useState([]);
     const [message, setMessage] = useState("");
+    const [errorMessage, ErrorMessage] = useState("");
+
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [uploadStatus, setUploadStatus] = useState(false);
     const indexOfLastItem = currentPage * itemsPerPage;
-
+    const [selectedId, setSelectedId] = useState(null);
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // This line creates a new array `currentItems` that contains only the items for the current page.
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    const [open, setOpen] = React.useState(false);
+    const [img, setImg] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
+
     useEffect(() => {
         axios
             .get(`${url}?page=${currentPage}&limit=${itemsPerPage}`)
             .then((res) => setData(res.data))
             .catch((err) => console.error(err));
-    }, [currentPage, itemsPerPage]);
-
+    }, [currentPage, itemsPerPage, uploadStatus]);
+    useEffect(() => {}, [uploadStatus]);
     const handlePageChange = (data) => {
         let selected = data.selected;
         setCurrentPage(selected + 1);
@@ -65,10 +78,76 @@ function Products() {
                 // console.error(error);
             });
     };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = (id) => {
+        console.log(id);
+        const image = data.find((item) => item.id === id);
+        setImg(image.image);
+        setSelectedId(id); // Store the id
+        setOpen(true);
+    };
+
+    // const
+
+    const uploadFile = (event) => {
+        const file = event.target.files[0];
+        const fileType = file.type;
+        const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+        if (!validImageTypes.includes(fileType)) {
+            // Not a valid image
+            ErrorMessage(
+                "Invalid file type."
+            );
+            return;
+        } else {
+            ErrorMessage("");
+        }
+        if (file) {
+            const url = URL.createObjectURL(file);
+            setPreviewImage(url);
+            setSelectedFile(file); // Store the file
+        }
+    };
+
+    const update = () => {
+        if (!selectedFile) {
+            ErrorMessage("No file selected.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("image", selectedFile);
+        formData.append("id", selectedId);
+
+        axios
+            .post("/update-product", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((response) => {
+                console.log(response);
+                setMessage("Product Image is updated successfully !");
+                setTimeout(() => setMessage(""), 3000);
+                setUploadStatus("success");
+                setSelectedId(null);
+                setSelectedFile(null);
+                setPreviewImage(null);
+                handleClose();
+            })
+            .catch((error) => {
+                console.error(error);
+                setUploadStatus("error");
+            });
+    };
     const handleDownload = () => {
         // create workbook and worksheet
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet("Product");
+
         let titleCell = worksheet.getCell("A1");
         titleCell.value = "Products";
         titleCell.alignment = {
@@ -100,18 +179,10 @@ function Products() {
             { key: "id", width: 10 },
             { key: "name", width: 20 },
             { key: "description", width: 20 },
-            { key: "quantity", width: 10 },
-            { key: "price", width: 15 },
+            { key: "quantity", width: 20 },
+            { key: "price", width: 20 },
         ];
-        worksheet.autoFilter = {
-            from: {
-                row: "A2",
-            },
-            to: {
-                //   row: 10,
-                column: "E5",
-            },
-        };
+
         data.forEach((product, index) => {
             const { id, name, description, quantity, price } = product;
 
@@ -133,6 +204,7 @@ function Products() {
                 wrapText: true,
             };
         });
+        const lastRow = data.length + 2;
 
         // calculate total price
         const totalPrice = data.reduce(
@@ -174,7 +246,18 @@ function Products() {
 
         worksheet.getRow(2).height = 20.35;
         worksheet.getRow(2).alignment = { horizontal: "right" };
-        // Merge cells for the title
+        // Merge cells for the title.
+
+        worksheet.autoFilter = {
+            from: {
+                row: 2,
+                column: 1,
+            },
+            to: {
+                row: 32,
+                column: 5,
+            },
+        };
 
         // worksheet.autoFilter = 'A1:C1';
         workbook.xlsx.writeBuffer().then((buffer) => {
@@ -209,16 +292,22 @@ function Products() {
                             <strong>Success!</strong> {message}
                         </div>
                     )}
+                    {/* {errorMessage && (
+                        <div className="alert alert-danger">
+                            <strong>Alert!</strong> {errorMessage}
+                        </div>
+                    )} */}
                     <table id="responseContainer">
                         <thead>
                             <tr>
                                 <th>Sr.No</th>
-                                {/* <th>Product ID</th> */}
+                                <th>Product Image</th>
                                 <th>Product Name</th>
                                 <th>Description</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
-                                <th>Product Image</th>
+                                <th>Change Image</th>
+                                {/* <th>Open Modal</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -226,6 +315,19 @@ function Products() {
                                 <tr key={item.id}>
                                     {/* <td>{index + 1}.</td> */}
                                     <td>{item.id}</td>
+                                    <td>
+                                        <div className="product-tumb">
+                                            <div className="imageContainer">
+                                                <img
+                                                    className="circle"
+                                                    src={`/images/${
+                                                        item.image
+                                                    }?v=${Date.now()}`}
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
                                     <td>
@@ -266,20 +368,28 @@ function Products() {
                                             />
                                         </div>
                                     </td>
-                                    <td>
+                                    {/* <td>
                                         <input
                                             type="file"
                                             name="image"
                                             className="file"
-                                            value={""}
+                                            // accept="image/png, image/jpeg"
                                             onChange={(event) =>
-                                                handleInputChange(
-                                                    event,
-                                                    item.id
-                                                )
+                                                uploadFile(event, item.id)
                                             }
-                                            onBlur={() => handleBlur(item.id)}
                                         />
+                                    </td> */}
+                                    <td>
+                                        <button
+                                            className="modal-button"
+                                            type="button"
+                                            onClick={() => handleOpen(item.id)}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faFileUpload}
+                                            />
+                                            Upload Image
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -300,6 +410,68 @@ function Products() {
                 subContainerClassName={"pages pagination"}
                 activeClassName={"active"}
             />
+            <Modal
+                onClose={handleClose}
+                open={open}
+                style={{
+                    // position: "absolute",
+                    // border: "0px solid #000",
+                    borderRadius: "8px",
+                    backgroundColor: "white",
+                    border: '2px solid #000',
+                    boxShadow: "background.paper",
+                    height: "49%",
+                    width: "49%",
+                    margin: "auto",
+                    padding: "0%",
+                    color: "Black",
+                   
+                }}
+            >
+                <>
+                    <div className="header">
+                        <h2 className="">Upload new Image of Product</h2>
+                        <div>
+                            <button
+                                className="close"
+                                type="button"
+                                onClick={handleClose}
+                            >
+                                {" "}
+                                <strong>
+                                    <FontAwesomeIcon icon={faWindowClose} />
+                                </strong>{" "}
+                            </button>
+                        </div>
+                    </div>
+                    <div id="seprator"></div>
+                    <div className="imageContainer-modal">
+                        <img
+                            className="circle-modal"
+                            src={previewImage || `/images/${img}`}
+                            alt=""
+                        />
+                    </div>
+                    
+                    <div className="footer">
+                    {errorMessage && (
+                        <div className="alert alert-danger">
+                            <strong>Alert!</strong> {errorMessage}
+                        </div>
+                    )}
+                        <input
+                            type="file"
+                            name="image"
+                            className="file"
+                            // accept="image/png, image/jpeg"
+                            onChange={(event) => uploadFile(event)}
+                        />
+                        <button onClick={update} className=".btn-default">
+                            Update
+                        </button>
+                    </div>
+                </>
+            </Modal>
         </>
     );
 }

@@ -15,6 +15,7 @@ import Logout from "./Logout";
 import Analytics from "./Analytics";
 import Cart from "./Cart";
 import Thankyou from "./Thankyou";
+import Checkout from "./Checkout";
 
 
 function MyApp() {
@@ -62,6 +63,7 @@ function MyApp() {
 
             <Route path="/about" element={<About />} />
             <Route path="/thankyou" element={<Thankyou />} />
+            <Route path="/checkout" element={<Checkout />} />
         </Routes>
       
     </BrowserRouter>
