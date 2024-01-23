@@ -6,6 +6,7 @@
 
 import "./bootstrap";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import {StripeProvider} from 'react-stripe-elements';
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -19,4 +20,4 @@ import "./components/Navbar";
 import "./components/Footer";
 
 
-    
+        
