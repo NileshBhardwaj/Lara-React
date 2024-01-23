@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { BrowserRouter as Router,Route, Link, BrowserRouter, Routes } from "react-router-dom";
+
 
 
 function Cart() {
@@ -79,6 +81,12 @@ function Cart() {
         .catch(function(error){
             console.log(error);
         })
+    }
+
+    const handleClick = () =>{
+
+        window.location = "/checkout?price=" + encodeURIComponent(totalPrice);
+        console.log("dgahs");
     }
     // console.log(totalPrice);
     return (
@@ -205,12 +213,24 @@ function Cart() {
                                            <strong> ${totalPrice.toFixed(2)}</strong>
                                             </span>
                                         </p>
+                                        <div className="checkout-button">
                                         <button onClick={() => checkout()}
                                     type="button"
-                                    className="btn btn-primary btn-lg">
-
+                                    className="btn btn-primary btn-lg" style={{width:"202px"}}>
+                                        
+                                        
                                    <strong>Pay Now</strong>
                                 </button>
+                                {/* <button style={{    color: "aliceblue", fontSize:"17px"}}
+                                    type="button"
+                                    className="btn btn-info">
+                                        
+                                        
+                                   <strong>Pay With Card</strong>
+                                </button> */}
+                                 <button className="" onClick={handleClick} style={{borderRadius: "5px"}}>  <strong>Card Payment</strong></button>
+                                       
+                                        </div>
                                     </div>
                                 </div>
                             </div>

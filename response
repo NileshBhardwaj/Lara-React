@@ -1,0 +1,1442 @@
+Stripe\Charge {#379 // app/Http/Controllers/StripeController.php:39
+  #_opts: 
+Stripe\Util
+\
+RequestOptions {#1338
+    +headers: []
+    +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+    +apiBase: null
+    apiKey: "sk_test_***********************************************************************************************N13d"
+    headers: []
+    apiBase: null
+  }
+  #_originalValues: array:46 [
+    "id" => "ch_3ObMiXA8ttpkva0V1rkTk6Tq"
+    "object" => "charge"
+    "amount" => 36500
+    "amount_captured" => 36500
+    "amount_refunded" => 0
+    "application" => null
+    "application_fee" => null
+    "application_fee_amount" => null
+    "balance_transaction" => "txn_3ObMiXA8ttpkva0V1tXR8Qu4"
+    "billing_details" => array:4 [
+      "address" => array:6 [
+        "city" => null
+        "country" => null
+        "line1" => null
+        "line2" => null
+        "postal_code" => "10004"
+        "state" => null
+      ]
+      "email" => null
+      "name" => null
+      "phone" => null
+    ]
+    "calculated_statement_descriptor" => "Stripe"
+    "captured" => true
+    "created" => 1705926909
+    "currency" => "usd"
+    "customer" => null
+    "description" => "Test payment from Nilesh Bhardwaj"
+    "destination" => null
+    "dispute" => null
+    "disputed" => false
+    "failure_balance_transaction" => null
+    "failure_code" => null
+    "failure_message" => null
+    "fraud_details" => []
+    "invoice" => null
+    "livemode" => false
+    "metadata" => []
+    "on_behalf_of" => null
+    "order" => null
+    "outcome" => array:6 [
+      "network_status" => "approved_by_network"
+      "reason" => null
+      "risk_level" => "normal"
+      "risk_score" => 35
+      "seller_message" => "Payment complete."
+      "type" => "authorized"
+    ]
+    "paid" => true
+    "payment_intent" => null
+    "payment_method" => "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+    "payment_method_details" => array:2 [
+      "card" => array:19 [
+        "amount_authorized" => 36500
+        "brand" => "visa"
+        "checks" => array:3 [
+          "address_line1_check" => null
+          "address_postal_code_check" => "pass"
+          "cvc_check" => "pass"
+        ]
+        "country" => "US"
+        "exp_month" => 12
+        "exp_year" => 2026
+        "extended_authorization" => array:1 [
+          "status" => "disabled"
+        ]
+        "fingerprint" => "0zzjNb2HBaxM90Pr"
+        "funding" => "credit"
+        "incremental_authorization" => array:1 [
+          "status" => "unavailable"
+        ]
+        "installments" => null
+        "last4" => "4242"
+        "mandate" => null
+        "multicapture" => array:1 [
+          "status" => "unavailable"
+        ]
+        "network" => "visa"
+        "network_token" => array:1 [
+          "used" => false
+        ]
+        "overcapture" => array:2 [
+          "maximum_amount_capturable" => 36500
+          "status" => "unavailable"
+        ]
+        "three_d_secure" => null
+        "wallet" => null
+      ]
+      "type" => "card"
+    ]
+    "receipt_email" => null
+    "receipt_number" => null
+    "receipt_url" => "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xT1o4Yk9BOHR0cGt2YTBWKP7Bua0GMgZKaml4pcU6LBYrJvPZYKW521ZXtfP9lzmN8zsIvSQZ-0mNQvHMWDT8sgjiw5C9xz_HGJwT"
+    "refunded" => false
+    "review" => null
+    "shipping" => null
+    "source" => array:24 [
+      "id" => "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+      "object" => "card"
+      "address_city" => null
+      "address_country" => null
+      "address_line1" => null
+      "address_line1_check" => null
+      "address_line2" => null
+      "address_state" => null
+      "address_zip" => "10004"
+      "address_zip_check" => "pass"
+      "brand" => "Visa"
+      "country" => "US"
+      "customer" => null
+      "cvc_check" => "pass"
+      "dynamic_last4" => null
+      "exp_month" => 12
+      "exp_year" => 2026
+      "fingerprint" => "0zzjNb2HBaxM90Pr"
+      "funding" => "credit"
+      "last4" => "4242"
+      "metadata" => []
+      "name" => null
+      "tokenization_method" => null
+      "wallet" => null
+    ]
+    "source_transfer" => null
+    "statement_descriptor" => null
+    "statement_descriptor_suffix" => null
+    "status" => "succeeded"
+    "transfer_data" => null
+    "transfer_group" => null
+  ]
+  #_values: array:46 [
+    "id" => "ch_3ObMiXA8ttpkva0V1rkTk6Tq"
+    "object" => "charge"
+    "amount" => 36500
+    "amount_captured" => 36500
+    "amount_refunded" => 0
+    "application" => null
+    "application_fee" => null
+    "application_fee_amount" => null
+    "balance_transaction" => "txn_3ObMiXA8ttpkva0V1tXR8Qu4"
+    "billing_details" => 
+Stripe
+\
+StripeObject {#1339
+      #_opts: 
+Stripe\Util
+\
+RequestOptions {#1343
+        +headers: []
+        +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+        +apiBase: null
+        apiKey: "sk_test_***********************************************************************************************N13d"
+        headers: []
+        apiBase: null
+      }
+      #_originalValues: array:4 [
+        "address" => array:6 [
+          "city" => null
+          "country" => null
+          "line1" => null
+          "line2" => null
+          "postal_code" => "10004"
+          "state" => null
+        ]
+        "email" => null
+        "name" => null
+        "phone" => null
+      ]
+      #_values: array:4 [
+        "address" => 
+Stripe
+\
+StripeObject {#1344
+          #_opts: 
+Stripe\Util
+\
+RequestOptions {#1348
+            +headers: []
+            +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+            +apiBase: null
+            apiKey: "sk_test_***********************************************************************************************N13d"
+            headers: []
+            apiBase: null
+          }
+          #_originalValues: array:6 [
+            "city" => null
+            "country" => null
+            "line1" => null
+            "line2" => null
+            "postal_code" => "10004"
+            "state" => null
+          ]
+          #_values: array:6 [
+            "city" => null
+            "country" => null
+            "line1" => null
+            "line2" => null
+            "postal_code" => "10004"
+            "state" => null
+          ]
+          #_unsavedValues: 
+Stripe\Util
+\
+Set {#1346
+            -_elts: []
+          }
+          #_transientValues: 
+Stripe\Util
+\
+Set {#1347
+            -_elts: []
+          }
+          #_retrieveOptions: []
+          #_lastResponse: null
+          city: null
+          country: null
+          line1: null
+          line2: null
+          postal_code: "10004"
+          state: null
+        }
+        "email" => null
+        "name" => null
+        "phone" => null
+      ]
+      #_unsavedValues: 
+Stripe\Util
+\
+Set {#1341
+        -_elts: []
+      }
+      #_transientValues: 
+Stripe\Util
+\
+Set {#1342
+        -_elts: []
+      }
+      #_retrieveOptions: []
+      #_lastResponse: null
+      address: 
+Stripe
+\
+StripeObject {#1344}
+      email: null
+      name: null
+      phone: null
+    }
+    "calculated_statement_descriptor" => "Stripe"
+    "captured" => true
+    "created" => 1705926909
+    "currency" => "usd"
+    "customer" => null
+    "description" => "Test payment from Nilesh Bhardwaj"
+    "destination" => null
+    "dispute" => null
+    "disputed" => false
+    "failure_balance_transaction" => null
+    "failure_code" => null
+    "failure_message" => null
+    "fraud_details" => []
+    "invoice" => null
+    "livemode" => false
+    "metadata" => 
+Stripe
+\
+StripeObject {#1340
+      #_opts: 
+Stripe\Util
+\
+RequestOptions {#1351
+        +headers: []
+        +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+        +apiBase: null
+        apiKey: "sk_test_***********************************************************************************************N13d"
+        headers: []
+        apiBase: null
+      }
+      #_originalValues: []
+      #_values: []
+      #_unsavedValues: 
+Stripe\Util
+\
+Set {#1349
+        -_elts: []
+      }
+      #_transientValues: 
+Stripe\Util
+\
+Set {#1350
+        -_elts: []
+      }
+      #_retrieveOptions: []
+      #_lastResponse: null
+    }
+    "on_behalf_of" => null
+    "order" => null
+    "outcome" => 
+Stripe
+\
+StripeObject {#1345
+      #_opts: 
+Stripe\Util
+\
+RequestOptions {#1355
+        +headers: []
+        +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+        +apiBase: null
+        apiKey: "sk_test_***********************************************************************************************N13d"
+        headers: []
+        apiBase: null
+      }
+      #_originalValues: array:6 [
+        "network_status" => "approved_by_network"
+        "reason" => null
+        "risk_level" => "normal"
+        "risk_score" => 35
+        "seller_message" => "Payment complete."
+        "type" => "authorized"
+      ]
+      #_values: array:6 [
+        "network_status" => "approved_by_network"
+        "reason" => null
+        "risk_level" => "normal"
+        "risk_score" => 35
+        "seller_message" => "Payment complete."
+        "type" => "authorized"
+      ]
+      #_unsavedValues: 
+Stripe\Util
+\
+Set {#1353
+        -_elts: []
+      }
+      #_transientValues: 
+Stripe\Util
+\
+Set {#1354
+        -_elts: []
+      }
+      #_retrieveOptions: []
+      #_lastResponse: null
+      network_status: "approved_by_network"
+      reason: null
+      risk_level: "normal"
+      risk_score: 35
+      seller_message: "Payment complete."
+      type: "authorized"
+    }
+    "paid" => true
+    "payment_intent" => null
+    "payment_method" => "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+    "payment_method_details" => 
+Stripe
+\
+StripeObject {#1352
+      #_opts: 
+Stripe\Util
+\
+RequestOptions {#1359
+        +headers: []
+        +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+        +apiBase: null
+        apiKey: "sk_test_***********************************************************************************************N13d"
+        headers: []
+        apiBase: null
+      }
+      #_originalValues: array:2 [
+        "card" => array:19 [
+          "amount_authorized" => 36500
+          "brand" => "visa"
+          "checks" => array:3 [
+            "address_line1_check" => null
+            "address_postal_code_check" => "pass"
+            "cvc_check" => "pass"
+          ]
+          "country" => "US"
+          "exp_month" => 12
+          "exp_year" => 2026
+          "extended_authorization" => array:1 [
+            "status" => "disabled"
+          ]
+          "fingerprint" => "0zzjNb2HBaxM90Pr"
+          "funding" => "credit"
+          "incremental_authorization" => array:1 [
+            "status" => "unavailable"
+          ]
+          "installments" => null
+          "last4" => "4242"
+          "mandate" => null
+          "multicapture" => array:1 [
+            "status" => "unavailable"
+          ]
+          "network" => "visa"
+          "network_token" => array:1 [
+            "used" => false
+          ]
+          "overcapture" => array:2 [
+            "maximum_amount_capturable" => 36500
+            "status" => "unavailable"
+          ]
+          "three_d_secure" => null
+          "wallet" => null
+        ]
+        "type" => "card"
+      ]
+      #_values: array:2 [
+        "card" => 
+Stripe
+\
+StripeObject {#1360
+          #_opts: 
+Stripe\Util
+\
+RequestOptions {#1364
+            +headers: []
+            +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+            +apiBase: null
+            apiKey: "sk_test_***********************************************************************************************N13d"
+            headers: []
+            apiBase: null
+          }
+          #_originalValues: array:19 [
+            "amount_authorized" => 36500
+            "brand" => "visa"
+            "checks" => array:3 [
+              "address_line1_check" => null
+              "address_postal_code_check" => "pass"
+              "cvc_check" => "pass"
+            ]
+            "country" => "US"
+            "exp_month" => 12
+            "exp_year" => 2026
+            "extended_authorization" => array:1 [
+              "status" => "disabled"
+            ]
+            "fingerprint" => "0zzjNb2HBaxM90Pr"
+            "funding" => "credit"
+            "incremental_authorization" => array:1 [
+              "status" => "unavailable"
+            ]
+            "installments" => null
+            "last4" => "4242"
+            "mandate" => null
+            "multicapture" => array:1 [
+              "status" => "unavailable"
+            ]
+            "network" => "visa"
+            "network_token" => array:1 [
+              "used" => false
+            ]
+            "overcapture" => array:2 [
+              "maximum_amount_capturable" => 36500
+              "status" => "unavailable"
+            ]
+            "three_d_secure" => null
+            "wallet" => null
+          ]
+          #_values: array:19 [
+            "amount_authorized" => 36500
+            "brand" => "visa"
+            "checks" => 
+Stripe
+\
+StripeObject {#1365
+              #_opts: 
+Stripe\Util
+\
+RequestOptions {#1369
+                +headers: []
+                +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+                +apiBase: null
+                apiKey: "sk_test_***********************************************************************************************N13d"
+                headers: []
+                apiBase: null
+              }
+              #_originalValues: array:3 [
+                "address_line1_check" => null
+                "address_postal_code_check" => "pass"
+                "cvc_check" => "pass"
+              ]
+              #_values: array:3 [
+                "address_line1_check" => null
+                "address_postal_code_check" => "pass"
+                "cvc_check" => "pass"
+              ]
+              #_unsavedValues: 
+Stripe\Util
+\
+Set {#1367
+                -_elts: []
+              }
+              #_transientValues: 
+Stripe\Util
+\
+Set {#1368
+                -_elts: []
+              }
+              #_retrieveOptions: []
+              #_lastResponse: null
+              address_line1_check: null
+              address_postal_code_check: "pass"
+              cvc_check: "pass"
+            }
+            "country" => "US"
+            "exp_month" => 12
+            "exp_year" => 2026
+            "extended_authorization" => 
+Stripe
+\
+StripeObject {#1366
+              #_opts: 
+Stripe\Util
+\
+RequestOptions {#1373
+                +headers: []
+                +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+                +apiBase: null
+                apiKey: "sk_test_***********************************************************************************************N13d"
+                headers: []
+                apiBase: null
+              }
+              #_originalValues: array:1 [
+                "status" => "disabled"
+              ]
+              #_values: array:1 [
+                "status" => "disabled"
+              ]
+              #_unsavedValues: 
+Stripe\Util
+\
+Set {#1371
+                -_elts: []
+              }
+              #_transientValues: 
+Stripe\Util
+\
+Set {#1372
+                -_elts: []
+              }
+              #_retrieveOptions: []
+              #_lastResponse: null
+              status: "disabled"
+            }
+            "fingerprint" => "0zzjNb2HBaxM90Pr"
+            "funding" => "credit"
+            "incremental_authorization" => 
+Stripe
+\
+StripeObject {#1370
+              #_opts: 
+Stripe\Util
+\
+RequestOptions {#1377
+                +headers: []
+                +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+                +apiBase: null
+                apiKey: "sk_test_***********************************************************************************************N13d"
+                headers: []
+                apiBase: null
+              }
+              #_originalValues: array:1 [
+                "status" => "unavailable"
+              ]
+              #_values: array:1 [
+                "status" => "unavailable"
+              ]
+              #_unsavedValues: 
+Stripe\Util
+\
+Set {#1375
+                -_elts: []
+              }
+              #_transientValues: 
+Stripe\Util
+\
+Set {#1376
+                -_elts: []
+              }
+              #_retrieveOptions: []
+              #_lastResponse: null
+              status: "unavailable"
+            }
+            "installments" => null
+            "last4" => "4242"
+            "mandate" => null
+            "multicapture" => 
+Stripe
+\
+StripeObject {#1374
+              #_opts: 
+Stripe\Util
+\
+RequestOptions {#1381
+                +headers: []
+                +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+                +apiBase: null
+                apiKey: "sk_test_***********************************************************************************************N13d"
+                headers: []
+                apiBase: null
+              }
+              #_originalValues: array:1 [
+                "status" => "unavailable"
+              ]
+              #_values: array:1 [
+                "status" => "unavailable"
+              ]
+              #_unsavedValues: 
+Stripe\Util
+\
+Set {#1379
+                -_elts: []
+              }
+              #_transientValues: 
+Stripe\Util
+\
+Set {#1380
+                -_elts: []
+              }
+              #_retrieveOptions: []
+              #_lastResponse: null
+              status: "unavailable"
+            }
+            "network" => "visa"
+            "network_token" => 
+Stripe
+\
+StripeObject {#1378
+              #_opts: 
+Stripe\Util
+\
+RequestOptions {#1385
+                +headers: []
+                +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+                +apiBase: null
+                apiKey: "sk_test_***********************************************************************************************N13d"
+                headers: []
+                apiBase: null
+              }
+              #_originalValues: array:1 [
+                "used" => false
+              ]
+              #_values: array:1 [
+                "used" => false
+              ]
+              #_unsavedValues: 
+Stripe\Util
+\
+Set {#1383
+                -_elts: []
+              }
+              #_transientValues: 
+Stripe\Util
+\
+Set {#1384
+                -_elts: []
+              }
+              #_retrieveOptions: []
+              #_lastResponse: null
+              used: false
+            }
+            "overcapture" => 
+Stripe
+\
+StripeObject {#1382
+              #_opts: 
+Stripe\Util
+\
+RequestOptions {#1389
+                +headers: []
+                +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+                +apiBase: null
+                apiKey: "sk_test_***********************************************************************************************N13d"
+                headers: []
+                apiBase: null
+              }
+              #_originalValues: array:2 [
+                "maximum_amount_capturable" => 36500
+                "status" => "unavailable"
+              ]
+              #_values: array:2 [
+                "maximum_amount_capturable" => 36500
+                "status" => "unavailable"
+              ]
+              #_unsavedValues: 
+Stripe\Util
+\
+Set {#1387
+                -_elts: []
+              }
+              #_transientValues: 
+Stripe\Util
+\
+Set {#1388
+                -_elts: []
+              }
+              #_retrieveOptions: []
+              #_lastResponse: null
+              maximum_amount_capturable: 36500
+              status: "unavailable"
+            }
+            "three_d_secure" => null
+            "wallet" => null
+          ]
+          #_unsavedValues: 
+Stripe\Util
+\
+Set {#1362
+            -_elts: []
+          }
+          #_transientValues: 
+Stripe\Util
+\
+Set {#1363
+            -_elts: []
+          }
+          #_retrieveOptions: []
+          #_lastResponse: null
+          amount_authorized: 36500
+          brand: "visa"
+          checks: 
+Stripe
+\
+StripeObject {#1365}
+          country: "US"
+          exp_month: 12
+          exp_year: 2026
+          extended_authorization: 
+Stripe
+\
+StripeObject {#1366}
+          fingerprint: "0zzjNb2HBaxM90Pr"
+          funding: "credit"
+          incremental_authorization: 
+Stripe
+\
+StripeObject {#1370}
+          installments: null
+          last4: "4242"
+          mandate: null
+          multicapture: 
+Stripe
+\
+StripeObject {#1374}
+          network: "visa"
+          network_token: 
+Stripe
+\
+StripeObject {#1378}
+          overcapture: 
+Stripe
+\
+StripeObject {#1382}
+          three_d_secure: null
+          wallet: null
+        }
+        "type" => "card"
+      ]
+      #_unsavedValues: 
+Stripe\Util
+\
+Set {#1357
+        -_elts: []
+      }
+      #_transientValues: 
+Stripe\Util
+\
+Set {#1358
+        -_elts: []
+      }
+      #_retrieveOptions: []
+      #_lastResponse: null
+      card: 
+Stripe
+\
+StripeObject {#1360}
+      type: "card"
+    }
+    "receipt_email" => null
+    "receipt_number" => null
+    "receipt_url" => "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xT1o4Yk9BOHR0cGt2YTBWKP7Bua0GMgZKaml4pcU6LBYrJvPZYKW521ZXtfP9lzmN8zsIvSQZ-0mNQvHMWDT8sgjiw5C9xz_HGJwT"
+    "refunded" => false
+    "review" => null
+    "shipping" => null
+    "source" => 
+Stripe
+\
+Card {#1356
+      #_opts: 
+Stripe\Util
+\
+RequestOptions {#1391
+        +headers: []
+        +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+        +apiBase: null
+        apiKey: "sk_test_***********************************************************************************************N13d"
+        headers: []
+        apiBase: null
+      }
+      #_originalValues: array:24 [
+        "id" => "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+        "object" => "card"
+        "address_city" => null
+        "address_country" => null
+        "address_line1" => null
+        "address_line1_check" => null
+        "address_line2" => null
+        "address_state" => null
+        "address_zip" => "10004"
+        "address_zip_check" => "pass"
+        "brand" => "Visa"
+        "country" => "US"
+        "customer" => null
+        "cvc_check" => "pass"
+        "dynamic_last4" => null
+        "exp_month" => 12
+        "exp_year" => 2026
+        "fingerprint" => "0zzjNb2HBaxM90Pr"
+        "funding" => "credit"
+        "last4" => "4242"
+        "metadata" => []
+        "name" => null
+        "tokenization_method" => null
+        "wallet" => null
+      ]
+      #_values: array:24 [
+        "id" => "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+        "object" => "card"
+        "address_city" => null
+        "address_country" => null
+        "address_line1" => null
+        "address_line1_check" => null
+        "address_line2" => null
+        "address_state" => null
+        "address_zip" => "10004"
+        "address_zip_check" => "pass"
+        "brand" => "Visa"
+        "country" => "US"
+        "customer" => null
+        "cvc_check" => "pass"
+        "dynamic_last4" => null
+        "exp_month" => 12
+        "exp_year" => 2026
+        "fingerprint" => "0zzjNb2HBaxM90Pr"
+        "funding" => "credit"
+        "last4" => "4242"
+        "metadata" => 
+Stripe
+\
+StripeObject {#1392
+          #_opts: 
+Stripe\Util
+\
+RequestOptions {#1396
+            +headers: []
+            +apiKey: "sk_test_51OZ8bOA8ttpkva0VAUMl7V7R0IQK43GqCcgj5H2agAcsFcUj1DFNEvxos7USBsQOwCR7u5qfaYjshWLRB1FV8htX00ySF9N13d"
+            +apiBase: null
+            apiKey: "sk_test_***********************************************************************************************N13d"
+            headers: []
+            apiBase: null
+          }
+          #_originalValues: []
+          #_values: []
+          #_unsavedValues: 
+Stripe\Util
+\
+Set {#1394
+            -_elts: []
+          }
+          #_transientValues: 
+Stripe\Util
+\
+Set {#1395
+            -_elts: []
+          }
+          #_retrieveOptions: []
+          #_lastResponse: null
+        }
+        "name" => null
+        "tokenization_method" => null
+        "wallet" => null
+      ]
+      #_unsavedValues: 
+Stripe\Util
+\
+Set {#1386
+        -_elts: []
+      }
+      #_transientValues: 
+Stripe\Util
+\
+Set {#1390
+        -_elts: []
+      }
+      #_retrieveOptions: []
+      #_lastResponse: null
+      +saveWithParent: false
+      id: "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+      object: "card"
+      address_city: null
+      address_country: null
+      address_line1: null
+      address_line1_check: null
+      address_line2: null
+      address_state: null
+      address_zip: "10004"
+      address_zip_check: "pass"
+      brand: "Visa"
+      country: "US"
+      customer: null
+      cvc_check: "pass"
+      dynamic_last4: null
+      exp_month: 12
+      exp_year: 2026
+      fingerprint: "0zzjNb2HBaxM90Pr"
+      funding: "credit"
+      last4: "4242"
+      metadata: 
+Stripe
+\
+StripeObject {#1392}
+      name: null
+      tokenization_method: null
+      wallet: null
+    }
+    "source_transfer" => null
+    "statement_descriptor" => null
+    "statement_descriptor_suffix" => null
+    "status" => "succeeded"
+    "transfer_data" => null
+    "transfer_group" => null
+  ]
+  #_unsavedValues: 
+Stripe\Util
+\
+Set {#1336
+    -_elts: []
+  }
+  #_transientValues: 
+Stripe\Util
+\
+Set {#1337
+    -_elts: []
+  }
+  #_retrieveOptions: []
+  #_lastResponse: 
+Stripe
+\
+ApiResponse {#1334
+    +headers: 
+Stripe\Util
+\
+CaseInsensitiveArray {#1118
+      -container: array:19 [
+        "server" => "nginx"
+        "date" => "Mon, 22 Jan 2024 12:35:10 GMT"
+        "content-type" => "application/json"
+        "content-length" => "3322"
+        "access-control-allow-credentials" => "true"
+        "access-control-allow-methods" => "GET,HEAD,PUT,PATCH,POST,DELETE"
+        "access-control-allow-origin" => "*"
+        "access-control-expose-headers" => "Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required"
+        "access-control-max-age" => "300"
+        "cache-control" => "no-cache, no-store"
+        "content-security-policy" => "report-uri https://q.stripe.com/csp-report?p=v1%2Fcharges; block-all-mixed-content; default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'"
+        "idempotency-key" => "b31b8533-dd93-4c9e-9fbd-c2508bd0b260"
+        "original-request" => "req_wcwtx6BZHWqtI5"
+        "request-id" => "req_wcwtx6BZHWqtI5"
+        "stripe-should-retry" => "false"
+        "stripe-version" => "2023-10-16"
+        "vary" => "Origin"
+        "x-stripe-routing-context-priority-tier" => "api-testmode"
+        "strict-transport-security" => "max-age=63072000; includeSubDomains; preload"
+      ]
+    }
+    +body: """
+      {
+
+        "id": "ch_3ObMiXA8ttpkva0V1rkTk6Tq",
+
+        "object": "charge",
+
+        "amount": 36500,
+
+        "amount_captured": 36500,
+
+        "amount_refunded": 0,
+
+        "application": null,
+
+        "application_fee": null,
+
+        "application_fee_amount": null,
+
+        "balance_transaction": "txn_3ObMiXA8ttpkva0V1tXR8Qu4",
+
+        "billing_details": {
+
+          "address": {
+
+            "city": null,
+
+            "country": null,
+
+            "line1": null,
+
+            "line2": null,
+
+            "postal_code": "10004",
+
+            "state": null
+
+          },
+
+          "email": null,
+
+          "name": null,
+
+          "phone": null
+
+        },
+
+        "calculated_statement_descriptor": "Stripe",
+
+        "captured": true,
+
+        "created": 1705926909,
+
+        "currency": "usd",
+
+        "customer": null,
+
+        "description": "Test payment from Nilesh Bhardwaj",
+
+        "destination": null,
+
+        "dispute": null,
+
+        "disputed": false,
+
+        "failure_balance_transaction": null,
+
+        "failure_code": null,
+
+        "failure_message": null,
+
+        "fraud_details": {},
+
+        "invoice": null,
+
+        "livemode": false,
+
+        "metadata": {},
+
+        "on_behalf_of": null,
+
+        "order": null,
+
+        "outcome": {
+
+          "network_status": "approved_by_network",
+
+          "reason": null,
+
+          "risk_level": "normal",
+
+          "risk_score": 35,
+
+          "seller_message": "Payment complete.",
+
+          "type": "authorized"
+
+        },
+
+        "paid": true,
+
+        "payment_intent": null,
+
+        "payment_method": "card_1ObMiXA8ttpkva0Vrt5I4G1g",
+
+        "payment_method_details": {
+
+          "card": {
+
+            "amount_authorized": 36500,
+
+            "brand": "visa",
+
+            "checks": {
+
+              "address_line1_check": null,
+
+              "address_postal_code_check": "pass",
+
+              "cvc_check": "pass"
+
+            },
+
+            "country": "US",
+
+            "exp_month": 12,
+
+            "exp_year": 2026,
+
+            "extended_authorization": {
+
+              "status": "disabled"
+
+            },
+
+            "fingerprint": "0zzjNb2HBaxM90Pr",
+
+            "funding": "credit",
+
+            "incremental_authorization": {
+
+              "status": "unavailable"
+
+            },
+
+            "installments": null,
+
+            "last4": "4242",
+
+            "mandate": null,
+
+            "multicapture": {
+
+              "status": "unavailable"
+
+            },
+
+            "network": "visa",
+
+            "network_token": {
+
+              "used": false
+
+            },
+
+            "overcapture": {
+
+              "maximum_amount_capturable": 36500,
+
+              "status": "unavailable"
+
+            },
+
+            "three_d_secure": null,
+
+            "wallet": null
+
+          },
+
+          "type": "card"
+
+        },
+
+        "receipt_email": null,
+
+        "receipt_number": null,
+
+        "receipt_url": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xT1o4Yk9BOHR0cGt2YTBWKP7Bua0GMgZKaml4pcU6LBYrJvPZYKW521ZXtfP9lzmN8zsIvSQZ-0mNQvHMWDT8sgjiw5C9xz_HGJwT",
+
+        "refunded": false,
+
+        "review": null,
+
+        "shipping": null,
+
+        "source": {
+
+          "id": "card_1ObMiXA8ttpkva0Vrt5I4G1g",
+
+          "object": "card",
+
+          "address_city": null,
+
+          "address_country": null,
+
+          "address_line1": null,
+
+          "address_line1_check": null,
+
+          "address_line2": null,
+
+          "address_state": null,
+
+          "address_zip": "10004",
+
+          "address_zip_check": "pass",
+
+          "brand": "Visa",
+
+          "country": "US",
+
+          "customer": null,
+
+          "cvc_check": "pass",
+
+          "dynamic_last4": null,
+
+          "exp_month": 12,
+
+          "exp_year": 2026,
+
+          "fingerprint": "0zzjNb2HBaxM90Pr",
+
+          "funding": "credit",
+
+          "last4": "4242",
+
+          "metadata": {},
+
+          "name": null,
+
+          "tokenization_method": null,
+
+          "wallet": null
+
+        },
+
+        "source_transfer": null,
+
+        "statement_descriptor": null,
+
+        "statement_descriptor_suffix": null,
+
+        "status": "succeeded",
+
+        "transfer_data": null,
+
+        "transfer_group": null
+
+      }
+      """
+    +json: array:46 [
+      "id" => "ch_3ObMiXA8ttpkva0V1rkTk6Tq"
+      "object" => "charge"
+      "amount" => 36500
+      "amount_captured" => 36500
+      "amount_refunded" => 0
+      "application" => null
+      "application_fee" => null
+      "application_fee_amount" => null
+      "balance_transaction" => "txn_3ObMiXA8ttpkva0V1tXR8Qu4"
+      "billing_details" => array:4 [
+        "address" => array:6 [
+          "city" => null
+          "country" => null
+          "line1" => null
+          "line2" => null
+          "postal_code" => "10004"
+          "state" => null
+        ]
+        "email" => null
+        "name" => null
+        "phone" => null
+      ]
+      "calculated_statement_descriptor" => "Stripe"
+      "captured" => true
+      "created" => 1705926909
+      "currency" => "usd"
+      "customer" => null
+      "description" => "Test payment from Nilesh Bhardwaj"
+      "destination" => null
+      "dispute" => null
+      "disputed" => false
+      "failure_balance_transaction" => null
+      "failure_code" => null
+      "failure_message" => null
+      "fraud_details" => []
+      "invoice" => null
+      "livemode" => false
+      "metadata" => []
+      "on_behalf_of" => null
+      "order" => null
+      "outcome" => array:6 [
+        "network_status" => "approved_by_network"
+        "reason" => null
+        "risk_level" => "normal"
+        "risk_score" => 35
+        "seller_message" => "Payment complete."
+        "type" => "authorized"
+      ]
+      "paid" => true
+      "payment_intent" => null
+      "payment_method" => "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+      "payment_method_details" => array:2 [
+        "card" => array:19 [
+          "amount_authorized" => 36500
+          "brand" => "visa"
+          "checks" => array:3 [
+            "address_line1_check" => null
+            "address_postal_code_check" => "pass"
+            "cvc_check" => "pass"
+          ]
+          "country" => "US"
+          "exp_month" => 12
+          "exp_year" => 2026
+          "extended_authorization" => array:1 [
+            "status" => "disabled"
+          ]
+          "fingerprint" => "0zzjNb2HBaxM90Pr"
+          "funding" => "credit"
+          "incremental_authorization" => array:1 [
+            "status" => "unavailable"
+          ]
+          "installments" => null
+          "last4" => "4242"
+          "mandate" => null
+          "multicapture" => array:1 [
+            "status" => "unavailable"
+          ]
+          "network" => "visa"
+          "network_token" => array:1 [
+            "used" => false
+          ]
+          "overcapture" => array:2 [
+            "maximum_amount_capturable" => 36500
+            "status" => "unavailable"
+          ]
+          "three_d_secure" => null
+          "wallet" => null
+        ]
+        "type" => "card"
+      ]
+      "receipt_email" => null
+      "receipt_number" => null
+      "receipt_url" => "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xT1o4Yk9BOHR0cGt2YTBWKP7Bua0GMgZKaml4pcU6LBYrJvPZYKW521ZXtfP9lzmN8zsIvSQZ-0mNQvHMWDT8sgjiw5C9xz_HGJwT"
+      "refunded" => false
+      "review" => null
+      "shipping" => null
+      "source" => array:24 [
+        "id" => "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+        "object" => "card"
+        "address_city" => null
+        "address_country" => null
+        "address_line1" => null
+        "address_line1_check" => null
+        "address_line2" => null
+        "address_state" => null
+        "address_zip" => "10004"
+        "address_zip_check" => "pass"
+        "brand" => "Visa"
+        "country" => "US"
+        "customer" => null
+        "cvc_check" => "pass"
+        "dynamic_last4" => null
+        "exp_month" => 12
+        "exp_year" => 2026
+        "fingerprint" => "0zzjNb2HBaxM90Pr"
+        "funding" => "credit"
+        "last4" => "4242"
+        "metadata" => []
+        "name" => null
+        "tokenization_method" => null
+        "wallet" => null
+      ]
+      "source_transfer" => null
+      "statement_descriptor" => null
+      "statement_descriptor_suffix" => null
+      "status" => "succeeded"
+      "transfer_data" => null
+      "transfer_group" => null
+    ]
+    +code: 200
+  }
+  +saveWithParent: false
+  id: "ch_3ObMiXA8ttpkva0V1rkTk6Tq"
+  object: "charge"
+  amount: 36500
+  amount_captured: 36500
+  amount_refunded: 0
+  application: null
+  application_fee: null
+  application_fee_amount: null
+  balance_transaction: "txn_3ObMiXA8ttpkva0V1tXR8Qu4"
+  billing_details: 
+Stripe
+\
+StripeObject {#1339}
+  calculated_statement_descriptor: "Stripe"
+  captured: true
+  created: 1705926909
+  currency: "usd"
+  customer: null
+  description: "Test payment from Nilesh Bhardwaj"
+  destination: null
+  dispute: null
+  disputed: false
+  failure_balance_transaction: null
+  failure_code: null
+  failure_message: null
+  fraud_details: []
+  invoice: null
+  livemode: false
+  metadata: 
+Stripe
+\
+StripeObject {#1340}
+  on_behalf_of: null
+  order: null
+  outcome: 
+Stripe
+\
+StripeObject {#1345}
+  paid: true
+  payment_intent: null
+  payment_method: "card_1ObMiXA8ttpkva0Vrt5I4G1g"
+  payment_method_details: 
+Stripe
+\
+StripeObject {#1352}
+  receipt_email: null
+  receipt_number: null
+  receipt_url: "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xT1o4Yk9BOHR0cGt2YTBWKP7Bua0GMgZKaml4pcU6LBYrJvPZYKW521ZXtfP9lzmN8zsIvSQZ-0mNQvHMWDT8sgjiw5C9xz_HGJwT"
+  refunded: false
+  review: null
+  shipping: null
+  source: 
+Stripe
+\
+Card {#1356}
+  source_transfer: null
+  statement_descriptor: null
+  statement_descriptor_suffix: null
+  status: "succeeded"
+  transfer_data: null
+  transfer_group: null
+}
