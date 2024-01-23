@@ -1,171 +1,179 @@
+// SplitForm.jsx
 import React, { useState } from "react";
-import Cards from "react-credit-cards-2";
-import "react-credit-cards-2/dist/es/styles-compiled.css";
+import {
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 
-import { loadStripe } from "@stripe/stripe-js";
-const CreditCardForm = () => {
-  const [state, setState] = useState({
-    number: "",
-    name: "",
-    expiry: "",
-    cvc: "",
-    name: "",
-    focus: "",
-  });
-  const [token, setToken] = useState(null);
-  const stripePromise = loadStripe('pk_test_51OZ8bOA8ttpkva0VcMDiMRgZ19UbgNtFydyW40M7llfTnSJwjgH53MPn19E1CaQdtW8ivMkd9P1VXNidX3SjM822008nTPk8I6'); 
+const SplitForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const stripe = useStripe();
+  const elements = useElements();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const stripe = await stripePromise;
+    // Validation
+    if (!name.trim()) {
+      setNameError("Name is required");
+      return;
+    }
+    if (!email.trim()) {
+      setEmailError("Email is required");
+      return;
+    }
 
-      // Attempt token generation with provided card data (less secure)
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: {
-          number: state.number,
-          exp_month: state.expiry.split('/')[0],
-          exp_year: state.expiry.split('/')[1],
-          cvc: state.cvc,
+    setNameError("");
+    setEmailError("");
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const cardElement = elements.getElement(CardNumberElement);
+
+    const { token, error } = await stripe.createToken(cardElement);
+
+    if (error) {
+      console.error(error);
+    } else {
+      const response = await fetch("/your-server-endpoint", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          token: token.id,
+          name,
+          email,
+          postalCode,
+        }),
       });
 
-      if (error) {
-        console.error('[error]', error);
-        // Handle errors appropriately (display user-friendly messages)
-      } else {
-        setToken(paymentMethod.id); // Store the generated token
+      const result = await response.json();
 
-        // Send masked card data and token to server
-        fetch('/your-server-endpoint', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            token,
-            cardData: {
-              maskedNumber: state.number.replace(/.(?=.{4})/g, '*'), // Mask card number
-              expiry: state.expiry,
-              name: state.name,
-            },
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Success:', data);
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      }
-    } catch (error) {
-      console.error('Stripe error:', error);
-      // Handle other Stripe-related errors
+      console.log(result);
     }
   };
-  const handleInputChange = (e) => {
-    let { name, value } = e.target;
 
-    if (name === "number") {
-      // value = value.replace(/\W/gi, "").replace(/(.{4})/g, "$1 ").trim();
-      if (value.replace(/\s/g, "").length > 16) {
-        return;
-      }
-    }
-
-    if (name === "expiry") {
-      value = value.replace(/\W/gi, "").replace(/(.{2})/, "$1/").trim();
-      if (value.length > 5) {
-        return;
-      }
-    }
-
-    if (name === "cvc") {
-      value = value.slice(0, 3);
-    }
-
-    setState((prev) => ({ ...prev, [name]: value }));
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    fontSize: "16px",
+    marginBottom: "8px",
   };
 
-  const handleInputFocus = (e) => {
-    setState((prev) => ({ ...prev, focus: e.target.name }));
+  const cardElementStyle = {
+    border: "1px solid #ced4da",
+    borderRadius: "4px",
+    padding: "10px",
+    marginBottom: "20px",
+  };
+
+  const cardContainerStyle = {
+    border: "1px solid #ced4da",
+    borderRadius: "4px",
+    padding: "20px",
+    marginBottom: "20px",
   };
 
   return (
-    <>
-      <div className="main-container">
-        <div className="child-container">
-          <div>
-            <Cards
-              number={state.number}
-              expiry={state.expiry}
-              cvc={state.cvc}
-              name={state.name}
-              focused={state.focus}
+    <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "auto" }}>
+      <div style={cardContainerStyle}>
+        <div style={{ marginBottom: "20px" }}>
+          <label>
+            Name
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              style={inputStyle}
             />
-            <div className="mt-3">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <input
-                    type="tel"
-                    name="number"
-                    className="form-control"
-                    placeholder="Card Number"
-                    value={state.number}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    name="name"
-                    className="form-control"
-                    placeholder="Name"
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                    required
-                  />
-                </div>
-                <div className="row">
-                  <div className="col-6 mb-3">
-                    <input
-                      type="text"
-                      name="expiry"
-                      className="form-control"
-                      placeholder="Valid Thru"
-                      value={state.expiry}
-                      onChange={handleInputChange}
-                      onFocus={handleInputFocus}
-                      required
-                    />
-                  </div>
-                  <div className="col-6 mb-3">
-                    <input
-                      type="text"
-                      name="cvc"
-                      className="form-control"
-                      placeholder="CVC"
-                      value={state.cvc}
-                      onChange={handleInputChange}
-                      onFocus={handleInputFocus}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="d-grid">
-                  <button type="submit" className="btn btn-dark"><strong>Confirm</strong></button>
-                </div>
-              </form>
-            </div>
-          </div>
+            <span style={{ color: "red" }}>{nameError}</span>
+          </label>
+        </div>
+        <div style={{ marginBottom: "20px" }}>
+          <label>
+            Email
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={inputStyle}
+            />
+            <span style={{ color: "red" }}>{emailError}</span>
+          </label>
         </div>
       </div>
-    </>
+      <div style={cardElementStyle}>
+        <label>
+          Card Number
+          <CardNumberElement options={cardElementOptions} />
+        </label>
+      </div>
+      <div style={cardElementStyle}>
+        <label>
+          Expiry Date
+          <CardExpiryElement options={cardElementOptions} />
+        </label>
+      </div>
+      <div style={cardElementStyle}>
+        <label>
+          CVC
+          <CardCvcElement options={cardElementOptions} />
+        </label>
+      </div>
+      <div style={{ marginBottom: "20px" }}>
+        <label>
+          Postal Code
+          <input
+            type="text"
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
+            required
+            style={inputStyle}
+          />
+        </label>
+      </div>
+      <button type="submit" disabled={!stripe} style={payButtonStyle}>
+        Pay
+      </button>
+    </form>
   );
 };
 
-export default CreditCardForm;
+const cardElementOptions = {
+  style: {
+    base: {
+      fontSize: "16px",
+      color: "#495057",
+      "::placeholder": {
+        color: "#6c757d",
+      },
+    },
+    invalid: {
+      color: "#dc3545",
+    },
+  },
+};
+
+const payButtonStyle = {
+  backgroundColor: "#000",
+  color: "#fff",
+  padding: "10px",
+  fontSize: "16px",
+  borderRadius: "4px",
+  cursor: "pointer",
+};
+
+export default SplitForm;
