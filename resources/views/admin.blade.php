@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin DashBoard</title>
     <style>
+    
         ul {
             list-style-type: none;
             margin: 0;
@@ -307,6 +308,9 @@
             margin-top: 15px;
             margin-right: 7px;
         }
+        
+div#app {
+}
     </style>
 </head>
 
