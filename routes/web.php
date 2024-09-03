@@ -48,6 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/remove_Cart', [CartController::class, 'remove_cart']);
     Route::post('/increase_quantity', [CartController::class, 'increase_quantity_cart']);
     Route::post('/decrease_quantity', [CartController::class, 'decrease_quantity_cart']);
+    Route::get('/getCountries',[UserController::class,'getCountries'])->name('getCountries');
+    Route::post('/getStates',[UserController::class,'getStates'])->name('getStates');
+    Route::post('/getCity',[UserController::class,'getCity'])->name('getCity');
 });
 
 
@@ -86,6 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/checkout', function () {
         return view('home');
     })->name("thankyou");
+    
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
