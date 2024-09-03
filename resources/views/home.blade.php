@@ -8,7 +8,6 @@
     <title>Lara-Reat</title>
 
     <style>
-        @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
         @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
 
 
@@ -364,6 +363,40 @@
             font-size: 19px;
             color: aliceblue;
         }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .child-container {
+            width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .checkout-form .form-control {
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .signupbtn {
+            background-color: #007bff;
+            color: white;
+            border-radius: 0;
+            border: none;
+            padding: 10px;
+        }
+        .checkout-button {
+    display: flex;
+    justify-content: center;
+}   
     </style>
 </head>
 
@@ -375,5 +408,5 @@
     @viteReactRefresh
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </body>
-
+<script src="https://unpkg.com/react-stripe-elements@latest/dist/react-stripe-elements.min.js"></script>
 </html>

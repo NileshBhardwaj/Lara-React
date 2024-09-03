@@ -1,0 +1,54 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 20px;
+    font-family: system-ui, sans-serif;
+}
+
+label,
+input {
+    display: block;
+}
+
+input {
+    box-shadow: none;
+    width: 100%;
+    -webkit-appearance: none;
+    font-size: 14px;
+}
+
+label {
+    margin-bottom: 20px;
+}
+
+input,
+.StripeElement {
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 5px 0;
+}
+
+.StripeElement--focus {
+    border: 2px solid purple;
+    transform: translate(-1px, -1px);
+    margin-bottom: -2px;
+}
+form {
+    margin-top: 13px;
+}
+.pay{
+    
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    
+}

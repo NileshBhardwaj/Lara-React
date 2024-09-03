@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomAuth;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,9 @@ Route::get('/signup-page', function () {
 });
 Route::get('/admin',[AdminController::class,'admin'])->middleware(['auth']);
 Route::get('/payment-data',[AdminController::class,'payment_data'])->middleware(['auth']);
+
+// Route::get('stripe', [StripeController::class, 'stripe']);
+Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 
 Route::group(['middleware' => 'auth'], function () {
